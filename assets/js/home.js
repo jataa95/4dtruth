@@ -110,7 +110,7 @@
     s.setProperty("--rr", `${lerp(2, 5, e)}px`); s.setProperty("--rp", e.toFixed(3));
     s.setProperty("--rl", clamp((e - 0.55) / 0.3).toFixed(3));
     if (!root.classList.contains("is-loading")) {
-      hero.style.setProperty("--hs", (1.08 - 0.06 * e).toFixed(4));
+      hero.style.setProperty("--hs", (1.02 - 0.02 * e).toFixed(4));
       heroContent.style.opacity = (1 - clamp(e * 1.8)).toFixed(3);
       heroContent.style.transform = `translateY(${-e * 70}px)`;
       scrollHint.style.setProperty("--so", (1 - clamp(e * 4)).toFixed(3));
@@ -145,7 +145,7 @@
     const hs = hero.style;
     const setFrame = (t, r, b, l, rad) => { hs.setProperty("--ht", t); hs.setProperty("--hr", r); hs.setProperty("--hb", b); hs.setProperty("--hl", l); hs.setProperty("--hrad", rad); };
     setFrame("50%", "50%", "50%", "50%", "4px");
-    hs.setProperty("--hs", "1.35");
+    hs.setProperty("--hs", "1.12");
     await Promise.all([wait(2300), videoReady]);
     loader.classList.add("out");
     hero.style.transition = "clip-path .7s cubic-bezier(.771,.029,.189,1.007)";
@@ -155,7 +155,7 @@
     hero.style.transition = "clip-path 1.25s cubic-bezier(.771,.029,.189,1.007)";
     video.style.transition = "transform 1.6s cubic-bezier(.771,.029,.189,1.007)";
     setFrame("0%", "0%", "0%", "0%", "0px");
-    hs.setProperty("--hs", "1.08");
+    hs.setProperty("--hs", "1.02");
     await wait(750);
     root.classList.remove("is-loading");
     heroContent.classList.add("in"); $$("[data-split]", heroContent).forEach((el) => el.classList.add("in"));
