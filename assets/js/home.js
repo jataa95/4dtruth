@@ -66,7 +66,7 @@
 
   // ---------- More Work marquee (speed reacts to scroll velocity) ----------
   const track = $("#marquee-track");
-  const mq = WORKS.map((w) => `<a class="mq" href="${pieceUrl(w)}"><img src="${imgSrc(w)}" alt="${w.title}" loading="lazy" /><span>${w.title}</span></a>`).join("");
+  const mq = WORKS.map((w) => `<a class="mq" href="${pieceUrl(w)}"><img src="assets/works/thumbs/${w.slug}.jpg" alt="${w.title}" loading="lazy" /><span>${w.title}</span></a>`).join("");
   track.innerHTML = mq + mq;
   $("#more-count").textContent = String(WORKS.length).padStart(3, "0");
   let mqX = 0, mqHover = false, mqSpeed = 0.6;
@@ -86,7 +86,7 @@
   const intro = $(".intro"), pin = $(".intro-pin"), hero = $("#hero"), heroContent = $("#hero-content");
   const reel = $("#reel"), reelMedia = $("#reel-media"), reelCount = $("#reel-count"), scrollHint = $(".hero-scroll");
   const REEL = ["moments-we-share", "ojude-series", "the-golden-path", "city-in-layers", "open-market-2", "the-weight-of-beauty", "vibrant-vision-2", "red-carpet"];
-  reelMedia.innerHTML = REEL.map((s) => `<img src="assets/works/${s}.jpg" alt="" />`).join("");
+  reelMedia.innerHTML = REEL.map((s, i) => `<img src="assets/works/${s}.jpg" alt=""${i ? ' loading="lazy"' : ""} />`).join("");
   const reelImgs = $$("img", reelMedia);
   reelImgs[0].classList.add("act");
   let reelI = 0, reelT = 0, reelBig = 0;

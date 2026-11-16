@@ -8,7 +8,7 @@ Live at https://4dtruth.vercel.app. Plain HTML, CSS and JavaScript with no build
 
 | Page | File | What's on it |
 |---|---|---|
-| Home (landing) | `index.html` | 3D painting-ring loader (first visit per session); video hero with call-to-action buttons; corner tile that grows into a full reel on scroll; stats; about teaser; selected work; series accordion; artist statements slider; commission process; More Work marquee |
+| Home (landing) | `index.html` | Hero that opens out of the wordmark preloader; video hero with call-to-action buttons; corner tile that grows into a full reel on scroll; stats; about teaser; selected work; series accordion; artist statements slider; commission process; More Work marquee |
 | Work | `work.html` | Every painting, filtered by theme (`?theme=ojude` etc.); grid and list views (list has a cursor-following preview) |
 | Artwork | `piece.html?w=<slug>` | One painting on a gallery wall, its details, WhatsApp enquiry, previous/next, a full-width "Next work" panel, related works |
 | About | `about.html` | Statement, studio film that opens on scroll, stats, disciplines, practice, themes |
@@ -18,6 +18,7 @@ Live at https://4dtruth.vercel.app. Plain HTML, CSS and JavaScript with no build
 
 The navbar, mobile menu, footer and page transitions are added to every page by `assets/js/core.js`. The motion is modelled on [ouiwill.com](https://www.ouiwill.com/):
 - **Navbar:** no background, just the logo and menu. It uses a difference blend so it stays readable over any colour, and hides on scroll down.
+- **Preloader (first visit per session):** a giant wordmark with paintings flickering inside the letters, a live counter and progress line.
 - **Page transitions:** a dark panel wipes over the page on leaving and wipes away on arrival.
 - **Text:** lines wipe in as they enter the screen, and some text fills from grey to ink as you scroll.
 - **Hovers:** a band sweeps down through link text.
@@ -34,7 +35,8 @@ styles.css              all styles
 assets/js/data.js       artworks, themes and contact details  <- edit content here
 assets/js/core.js       shared nav/footer/transitions/motion
 assets/js/<page>.js     page-specific behaviour
-assets/works/           artwork images (cropped from the Instagram screenshots)
+assets/works/           artwork images: cropped from the Instagram screenshots and
+                        AI-upscaled (Real-ESRGAN x4), 1600px; thumbs/ holds 800px copies
 assets/media/           studio video + poster
 assets/texture/         canvas weave + film grain
 assets/reference/       original screenshots and video

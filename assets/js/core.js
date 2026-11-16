@@ -60,7 +60,7 @@
       <div class="menu-strip">
         <p class="mono menu-h">Latest work</p>
         <div class="ms-row">
-          ${WORKS.slice(0, 6).map((w, i) => `<a class="ms" href="piece.html?w=${w.slug}" style="--i:${i}"><img src="assets/works/${w.slug}.jpg" alt="${w.title}" loading="lazy" /><span class="mono">${w.title}</span></a>`).join("")}
+          ${WORKS.slice(0, 6).map((w, i) => `<a class="ms" href="piece.html?w=${w.slug}" style="--i:${i}"><img src="assets/works/thumbs/${w.slug}.jpg" alt="${w.title}" loading="lazy" /><span class="mono">${w.title}</span></a>`).join("")}
         </div>
       </div>
       <div class="menu-foot">
@@ -145,7 +145,7 @@
         <div class="pl-bar"><i id="pl-bar"></i></div>
       </div>`);
     // preload the paintings used inside the letters
-    PAINTS.forEach((s) => { const im = new Image(); im.src = `assets/works/${s}.jpg`; });
+    PAINTS.forEach((s) => { const im = new Image(); im.src = `assets/works/thumbs/${s}.jpg`; });
     const pl = $("#pl"), plN = $("#pl-n"), plBar = $("#pl-bar"), plLetters = $$(".pl-c", pl);
     const layoutPL = () => {
       const w = $(".pl-word", pl).getBoundingClientRect();
@@ -153,8 +153,8 @@
       pl.style.setProperty("--fw", `${w.width}px`);
     };
     let pk = 0;
-    const flick = setInterval(() => { pk = (pk + 1) % PAINTS.length; pl.style.setProperty("--paint", `url(assets/works/${PAINTS[pk]}.jpg)`); }, 160);
-    pl.style.setProperty("--paint", `url(assets/works/${PAINTS[0]}.jpg)`);
+    const flick = setInterval(() => { pk = (pk + 1) % PAINTS.length; pl.style.setProperty("--paint", `url(assets/works/thumbs/${PAINTS[pk]}.jpg)`); }, 160);
+    pl.style.setProperty("--paint", `url(assets/works/thumbs/${PAINTS[0]}.jpg)`);
 
     // what we wait for: fonts, eager images on the page, the hero video (home)
     const assets = [document.fonts.ready];
@@ -184,7 +184,7 @@
         requestAnimationFrame(tick);
       });
       clearInterval(flick);
-      pl.style.setProperty("--paint", `url(assets/works/moments-we-share.jpg)`);
+      pl.style.setProperty("--paint", `url(assets/works/thumbs/moments-we-share.jpg)`);
       await wait(250);
       pl.classList.add("out");                 // letters lift away
       await wait(380);
