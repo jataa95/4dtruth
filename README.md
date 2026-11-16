@@ -24,7 +24,7 @@ The navbar, mobile menu, footer and page transitions are added to every page by 
 - **Hovers:** a band sweeps down through link text.
 - **Images:** cards reveal with a clip and drift slightly as you scroll (parallax). Numbers count up.
 - **Background:** a painter's-canvas weave behind every page, plus an animated film-grain overlay.
-- **Footer:** a big commission call to action, menu and contact links, a live Lagos clock, and a giant wordmark filled with moving paint that changes on hover.
+- **Footer:** a big commission call to action, menu and contact links, a live Lagos clock, and a giant wordmark whose letters rise as you scroll in, with a spotlight that shows paint through the letters under the cursor.
 - **Smooth scrolling:** via [Lenis](https://github.com/darkroomengineering/lenis) (MIT), stored in `assets/vendor/`.
 
 ## Structure
