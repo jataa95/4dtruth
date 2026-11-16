@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work | 4dtruth</title>
+  <meta name="description" content="The collection: textured oil paintings by 4dtruth (Seun Okunola), from the Ojude series and Lagos markets to portraits and cityscapes." />
+  <meta property="og:image" content="/assets/works/ojude-series.jpg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0a09'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='15' fill='white' text-anchor='middle'%3E4d%3C/text%3E%3C/svg%3E" />
+  <script>if (sessionStorage.getItem("fdt-pt")) document.documentElement.classList.add("pt-in");</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="work">
+  <main>
+    <section class="page-head">
+      <p class="eyebrow" data-split="wipe">Collection · Oil on canvas</p>
+      <h1 class="page-title" data-split="wipe">Work</h1>
+      <div class="page-intro">
+        <span class="mono" style="color:var(--muted)">(<span id="total">013</span>) works</span>
+        <p data-split="wipe">Crowds, markets, portraits and cities, built up in thick palette-knife oil. Every piece is available to enquire about.</p>
+      </div>
+    </section>
+
+    <div class="controls" style="margin:0 var(--pad) 40px">
+      <div class="chips" id="chips" role="tablist" aria-label="Filter by theme"></div>
+      <div class="view-toggle" role="group" aria-label="View">
+        <button class="chip act" data-view="grid">Grid</button>
+        <button class="chip" data-view="list">List</button>
+      </div>
+    </div>
+
+    <div class="grid3" id="grid3"></div>
+    <div class="list" id="list" hidden></div>
+    <div class="preview" id="preview" aria-hidden="true"><div class="preview-in"><img id="preview-img" alt="" /></div></div>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/work.js"></script>
+</body>
+</html>

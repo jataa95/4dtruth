@@ -1,45 +1,55 @@
 # 4dtruth
 
-Portfolio website for **4dtruth**, the studio of Seun Okunola: a multidisciplinary artist, painter and colourist based in Lagos, Nigeria.
+Website for **4dtruth**, the studio of Seun Okunola: a multidisciplinary artist, painter and colourist based in Lagos, Nigeria.
 
-The design and motion are modelled on [ouiwill.com](https://www.ouiwill.com/):
-- **Loader:** a 3D ring of paintings spins, then the hero opens out of a small centre frame.
-- **Hero:** the headline wipes in line by line, and a corner tile cycles through paintings.
-- **Scroll:** the hero is pinned while the corner tile grows into a full-width reel.
-- **Header:** white with a difference blend so it stays visible over any colour, and it hides on scroll down.
+Live at https://4dtruth.vercel.app. Plain HTML, CSS and JavaScript with no build step.
+
+## Pages
+
+| Page | File | What's on it |
+|---|---|---|
+| Home (landing) | `index.html` | 3D painting-ring loader (first visit per session); video hero with call-to-action buttons; corner tile that grows into a full reel on scroll; stats; about teaser; selected work; series accordion; artist statements slider; commission process; More Work marquee |
+| Work | `work.html` | Every painting, filtered by theme (`?theme=ojude` etc.); grid and list views (list has a cursor-following preview) |
+| Artwork | `piece.html?w=<slug>` | One painting on a gallery wall, its details, WhatsApp enquiry, previous/next, a full-width "Next work" panel, related works |
+| About | `about.html` | Statement, studio film that opens on scroll, stats, disciplines, practice, themes |
+| Contact | `contact.html` | Contact methods, live Lagos clock, and an enquiry form that opens WhatsApp with the message pre-filled (`?w=<slug>` preselects a painting) |
+
+## Shared design and motion
+
+The navbar, mobile menu, footer and page transitions are added to every page by `assets/js/core.js`. The motion is modelled on [ouiwill.com](https://www.ouiwill.com/):
+- **Navbar:** no background, just the logo and menu. It uses a difference blend so it stays readable over any colour, and hides on scroll down.
+- **Page transitions:** a dark panel wipes over the page on leaving and wipes away on arrival.
+- **Text:** lines wipe in as they enter the screen, and some text fills from grey to ink as you scroll.
 - **Hovers:** a band sweeps down through link text.
-- **Text:** lines wipe in on entry, and the About text fills from grey to black as you scroll.
-- **Work cards:** images reveal with a clip and drift slightly as you scroll (parallax).
-- **Statements:** a dark, full-screen slider with tabs and progress bars.
-- **More Work:** a marquee whose speed reacts to scrolling.
+- **Images:** cards reveal with a clip and drift slightly as you scroll (parallax). Numbers count up.
+- **Background:** a painter's-canvas weave behind every page, plus an animated film-grain overlay.
+- **Footer:** a big commission call to action, menu and contact links, a live Lagos clock, and a giant wordmark filled with moving paint that changes on hover.
 - **Smooth scrolling:** via [Lenis](https://github.com/darkroomengineering/lenis) (MIT), stored in `assets/vendor/`.
-
-All of it is plain HTML, CSS and JavaScript, with no build step.
 
 ## Structure
 
 ```
-index.html            page markup
-styles.css            all styles
-main.js               artwork data and every interaction / animation
-assets/works/         cleaned artwork images, cropped from the Instagram screenshots
-assets/media/         studio video (web-compressed) and poster frame
-assets/reference/     original screenshots and video, kept for reference
-assets/vendor/        Lenis smooth-scroll library
+index.html, work.html, piece.html, about.html, contact.html
+styles.css              all styles
+assets/js/data.js       artworks, themes and contact details  <- edit content here
+assets/js/core.js       shared nav/footer/transitions/motion
+assets/js/<page>.js     page-specific behaviour
+assets/works/           artwork images (cropped from the Instagram screenshots)
+assets/media/           studio video + poster
+assets/texture/         canvas weave + film grain
+assets/reference/       original screenshots and video
+assets/vendor/          Lenis
 ```
 
-## Editing artworks
+## Adding a painting
 
-Every painting is listed in the `WORKS` array at the top of `main.js`, with its title, size, medium, series and statement. `SELECTED` sets which works appear in the Selected Work grid; mark an entry `wide` to make it a full-width row. To add a work:
-1. Drop a JPG into `assets/works/`.
-2. Add an entry to `WORKS` with a matching `slug`.
+1. Add a JPG to `assets/works/`.
+2. Add an entry to `WORKS` in `assets/js/data.js` with the same `slug`, plus a `theme` (one of the `THEMES` ids).
+
+It then appears automatically on the Work page, in the marquee and in the contact form, and gets its own artwork page.
 
 ## Run locally
-
-It's a static site with no build step:
 
 ```bash
 python3 -m http.server 8000
 ```
-
-Then open http://localhost:8000. It can be deployed as-is to GitHub Pages, Netlify or Vercel.

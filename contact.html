@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | 4dtruth</title>
+  <meta name="description" content="Commission a painting, enquire about a work or collaborate with 4dtruth (Seun Okunola), Lagos. Very responsive on WhatsApp." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0a09'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='15' fill='white' text-anchor='middle'%3E4d%3C/text%3E%3C/svg%3E" />
+  <script>if (sessionStorage.getItem("fdt-pt")) document.documentElement.classList.add("pt-in");</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="contact">
+  <main>
+    <section class="ct-hero">
+      <p class="eyebrow" data-split="wipe">Contact · Commissions open</p>
+      <h1 class="ct-title" data-split="wipe" style="margin-top:28px">Let’s make something with colour.</h1>
+    </section>
+
+    <section class="ct-body">
+      <div>
+        <div class="ct-methods">
+          <a class="ct-m" href="https://wa.me/2348146375549" target="_blank" rel="noopener"><strong>WhatsApp ↗</strong><span>+234 814 637 5549<br />Fastest reply</span></a>
+          <a class="ct-m" href="tel:+2348146375549"><strong>Call ↗</strong><span>+234 814 637 5549</span></a>
+          <a class="ct-m" href="https://www.instagram.com/4dtruth/" target="_blank" rel="noopener"><strong>Instagram ↗</strong><span>@4dtruth</span></a>
+          <a class="ct-m" href="https://www.threads.net/@4dtruth" target="_blank" rel="noopener"><strong>Threads ↗</strong><span>@4dtruth</span></a>
+        </div>
+        <div class="ct-studio">
+          <div><p class="mono f-h" style="color:var(--muted)">Studio</p><p>Lagos, Nigeria</p></div>
+          <div><p class="mono f-h" style="color:var(--muted)">Local time</p><p><span data-clock>--:--:--</span> WAT</p></div>
+        </div>
+      </div>
+
+      <form class="form" id="form" novalidate>
+        <div class="fld" id="f-name">
+          <label for="name">Your name</label>
+          <input class="npt" id="name" name="name" autocomplete="name" placeholder="Full name" />
+          <div class="fld-err">Please tell us your name.</div>
+        </div>
+        <div class="fld">
+          <span class="fld-l">I’m interested in</span>
+          <div class="radios" id="interest">
+            <input type="radio" name="interest" id="i1" value="A commission" checked /><label for="i1">A commission</label>
+            <input type="radio" name="interest" id="i2" value="An existing piece" /><label for="i2">An existing piece</label>
+            <input type="radio" name="interest" id="i3" value="A collaboration" /><label for="i3">Collaboration</label>
+            <input type="radio" name="interest" id="i4" value="An exhibition or press" /><label for="i4">Exhibition / press</label>
+            <input type="radio" name="interest" id="i5" value="Something else" /><label for="i5">Something else</label>
+          </div>
+        </div>
+        <div class="two">
+          <div class="fld">
+            <label for="piece">Artwork (optional)</label>
+            <select class="npt" id="piece" name="piece"><option value="">No specific piece</option></select>
+          </div>
+          <div class="fld">
+            <label for="size">Space or size (optional)</label>
+            <input class="npt" id="size" name="size" placeholder="e.g. 4 × 3 ft, living room wall" />
+          </div>
+        </div>
+        <div class="fld" id="f-msg">
+          <label for="msg">Message</label>
+          <textarea class="npt" id="msg" name="msg" placeholder="Tell us about your idea, timeline and budget"></textarea>
+          <div class="fld-err">Please add a short message.</div>
+        </div>
+        <div class="form-foot">
+          <p class="form-note">Opens WhatsApp with your message ready to send.</p>
+          <button class="btn" type="submit"><span class="bnd-hov">Send via WhatsApp</span><i>↗</i></button>
+        </div>
+        <div class="form-done" id="form-done"><p>Thanks! WhatsApp should have opened with your message. If it didn’t, message <a href="https://wa.me/2348146375549" target="_blank" rel="noopener" style="text-decoration:underline">+234 814 637 5549</a> directly.</p></div>
+      </form>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/contact.js"></script>
+</body>
+</html>

@@ -4,36 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>4dtruth | Seun Okunola: Painter &amp; Colourist, Lagos</title>
-  <meta name="description" content="4dtruth is the studio of Seun Okunola, a multidisciplinary artist and colourist based in Lagos, Nigeria. Textured oil paintings of crowds, markets, colour and people." />
+  <meta name="description" content="4dtruth is the studio of Seun Okunola, a multidisciplinary artist and colourist in Lagos, Nigeria. Textured oil paintings of crowds, markets and portraits. Commissions open." />
   <meta property="og:title" content="4dtruth | Seun Okunola" />
   <meta property="og:description" content="I paint everything. Multidisciplinary artist and colourist based in Lagos, Nigeria." />
   <meta property="og:image" content="/assets/works/moments-we-share.jpg" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060606'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='15' fill='white' text-anchor='middle'%3E4d%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0a09'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='15' fill='white' text-anchor='middle'%3E4d%3C/text%3E%3C/svg%3E" />
+  <script>if (sessionStorage.getItem("fdt-pt")) document.documentElement.classList.add("pt-in");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <!-- Loader: a ring of paintings spinning in 3D, then the hero opens out of it -->
+<body data-page="home">
+  <!-- Loader (first visit per session): a ring of paintings spinning in 3D -->
   <div class="loader" id="loader" aria-hidden="true">
     <div class="ring-stage"><div class="ring" id="ring"></div></div>
   </div>
 
-  <!-- Navigation: white with difference blend, hides on scroll down -->
-  <header class="nav" id="nav">
-    <a href="#top" class="nav-logo bnd-hov" data-scroll>4dtruth</a>
-    <nav class="nav-menu" aria-label="Main">
-      <a href="#top" class="bnd-hov" data-scroll>Home</a>
-      <a href="#work" class="bnd-hov" data-scroll>Work</a>
-      <a href="#about" class="bnd-hov" data-scroll>About</a>
-      <a href="#contact" class="bnd-hov" data-scroll>Contact</a>
-    </nav>
-    <a href="#contact" class="nav-cta bnd-hov" data-scroll>Commission a piece <span aria-hidden="true">↗</span></a>
-  </header>
-
   <main>
-    <!-- Intro: pinned hero; the corner tile grows into the full reel as you scroll -->
+    <!-- Hero: pinned; the corner tile grows into the full reel as you scroll -->
     <section class="intro" id="top">
       <div class="intro-pin">
         <div class="hero" id="hero">
@@ -41,17 +30,33 @@
             <source src="assets/media/studio.mp4" type="video/mp4" />
           </video>
           <div class="hero-shade"></div>
-          <h1 class="hero-title" data-split="wipe">I paint everything.<br />Colour, texture and the rhythm of people.</h1>
+          <div class="hero-content" id="hero-content" data-manual>
+            <p class="hero-eyebrow" data-split="wipe">Seun Okunola · Painter &amp; colourist · Lagos</p>
+            <h1 class="hero-title" data-split="wipe">I paint everything.<br />Colour, texture and the rhythm of people.</h1>
+            <div class="hero-btns">
+              <a href="work.html" class="btn btn-light"><span class="bnd-hov">View the collection</span><i>↗</i></a>
+              <a href="contact.html" class="btn btn-glass"><span class="bnd-hov">Commission a piece</span><i>↗</i></a>
+            </div>
+          </div>
+          <div class="hero-scroll mono"><i></i>Scroll</div>
         </div>
-        <a class="reel" id="reel" href="#work" data-scroll aria-label="View the collection">
+        <a class="reel" id="reel" href="work.html" aria-label="View the collection">
           <div class="reel-media" id="reel-media"></div>
-          <span class="reel-label">View the Collection</span>
+          <span class="reel-label">View the Collection ↗</span>
           <span class="reel-count mono" id="reel-count">01/08</span>
         </a>
       </div>
     </section>
 
-    <!-- About -->
+    <!-- Stats -->
+    <section class="stats" aria-label="At a glance">
+      <div class="stat fade" data-reveal><div class="stat-n"><span data-count="17.1" data-suffix="K">0</span></div><p class="stat-l">Followers on Instagram</p></div>
+      <div class="stat fade" data-reveal><div class="stat-n"><span data-count="673">0</span></div><p class="stat-l">Posts shared from the studio</p></div>
+      <div class="stat fade" data-reveal><div class="stat-n"><span data-count="13" data-pad="2">00</span></div><p class="stat-l">Works in this collection</p></div>
+      <div class="stat fade" data-reveal><div class="stat-n"><span data-count="5" data-pad="2">00</span></div><p class="stat-l">Series &amp; themes</p></div>
+    </section>
+
+    <!-- About teaser -->
     <section class="about" id="about">
       <div class="about-side">
         <p class="label" data-split="wipe">About</p>
@@ -62,16 +67,27 @@
       <div class="about-main">
         <p class="about-lead" data-split="fill">4dtruth is the studio of Seun Okunola, a multidisciplinary artist and colourist in Lagos, Nigeria, building crowds, markets and portraits out of colour and texture.</p>
         <p class="about-sub" data-split="wipe">Thick, palette-knife oil on canvas. Festival scenes from the Ojude series, the open markets of Lagos, and quieter studies of light, identity and the beauty of togetherness.</p>
+        <a href="about.html" class="btn btn-ghost about-more"><span class="bnd-hov">More about the artist</span><i>↗</i></a>
       </div>
     </section>
 
     <!-- Selected work -->
     <section class="work" id="work">
-      <div class="work-head">
+      <div class="sec-head">
         <h2 class="h2" data-split="wipe">Selected Work</h2>
-        <a href="#more" class="mono view-all bnd-hov" data-scroll>View all ↗</a>
+        <a href="work.html" class="mono bnd-hov">View all ↗</a>
       </div>
       <div class="grid" id="grid"></div>
+      <div class="grid-cta"><a href="work.html" class="btn"><span class="bnd-hov">View all 13 works</span><i>↗</i></a></div>
+    </section>
+
+    <!-- Series accordion -->
+    <section class="series" id="series">
+      <div class="sec-head">
+        <h2 class="h2" data-split="wipe">Series &amp; Themes</h2>
+        <span class="mono" style="color:var(--muted)">Hover to explore</span>
+      </div>
+      <div class="series-row" id="series-row"></div>
     </section>
 
     <!-- Statements: full-bleed dark slider -->
@@ -79,61 +95,43 @@
       <div class="testi-bgs" id="testi-bgs"></div>
       <div class="testi-inner">
         <div class="testi-top mono"><span>Artist Statements</span><span id="testi-index">01/04</span></div>
-        <div class="testi-quotes" id="testi-quotes"></div>
+        <div class="testi-quotes" id="testi-quotes" data-manual></div>
         <div class="testi-tabs" id="testi-tabs" role="tablist"></div>
+      </div>
+    </section>
+
+    <!-- Commission process -->
+    <section class="process" id="commission">
+      <div class="process-intro">
+        <p class="label" data-split="wipe">Commissions</p>
+        <h2 class="h2" style="margin-top:22px" data-split="wipe">A painting made for your space.</h2>
+        <p data-split="wipe">From a single portrait to a wall-sized crowd scene, commissions start with a conversation.</p>
+        <a href="contact.html" class="btn"><span class="bnd-hov">Start a commission</span><i>↗</i></a>
+      </div>
+      <div class="steps">
+        <div class="step fade" data-reveal><div class="step-n">01</div><h3>Reach out</h3><p>Send a message on WhatsApp or through the contact form with your idea, space and budget.</p></div>
+        <div class="step fade" data-reveal><div class="step-n">02</div><h3>Shape the idea</h3><p>Agree on the subject, colour story, size and timeline together.</p></div>
+        <div class="step fade" data-reveal><div class="step-n">03</div><h3>In the studio</h3><p>The piece is built up layer by layer in thick, palette-knife oil.</p></div>
+        <div class="step fade" data-reveal><div class="step-n">04</div><h3>Yours to keep</h3><p>The finished painting is prepared for collection or delivery.</p></div>
       </div>
     </section>
 
     <!-- More work marquee -->
     <section class="more" id="more">
-      <div class="more-head">
+      <div class="sec-head">
         <h2 class="h2" data-split="wipe">More Work</h2>
-        <span class="more-count mono">(<span id="more-count">013</span>)</span>
+        <span class="count">(<span id="more-count">013</span>)</span>
       </div>
-      <div class="marquee" id="marquee"><div class="marquee-track" id="marquee-track"></div></div>
-      <div class="marquee-names mono"><span>Ojude</span><span>Open Market</span><span>Vibrant Vision</span><span>City in Layers</span><span>Lagos, Nigeria</span></div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact" id="contact">
-      <p class="label" data-split="wipe">Get in touch</p>
-      <h2 class="contact-title" data-split="wipe">For commissions, acquisitions and collaborations, reach out. Very responsive.</h2>
-      <div class="contact-links">
-        <a href="https://wa.me/2348146375549" target="_blank" rel="noopener"><span class="bnd-hov">WhatsApp ↗</span><small>+234 814 637 5549</small></a>
-        <a href="tel:+2348146375549"><span class="bnd-hov">Call ↗</span><small>+234 814 637 5549</small></a>
-        <a href="https://www.instagram.com/4dtruth/" target="_blank" rel="noopener"><span class="bnd-hov">Instagram ↗</span><small>@4dtruth</small></a>
-        <a href="https://www.threads.net/@4dtruth" target="_blank" rel="noopener"><span class="bnd-hov">Threads ↗</span><small>@4dtruth</small></a>
-      </div>
+      <div class="marquee"><div class="marquee-track" id="marquee-track"></div></div>
+      <div class="marquee-names mono"><span>Ojude</span><span>Open Market</span><span>Gatherings</span><span>Portraits</span><span>Cityscapes</span></div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer-row">
-      <span>Lagos, Nigeria</span>
-      <span>Arts &amp; Entertainment</span>
-      <a href="#top" class="bnd-hov" data-scroll>Back to top ↑</a>
-      <span>© <span id="year"></span> 4dtruth</span>
-    </div>
-    <div class="wordmark" id="wordmark" aria-label="4dtruth"></div>
-  </footer>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Artwork">
-    <button class="lb-close bnd-hov" id="lb-close" aria-label="Close">Close ✕</button>
-    <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous work">←</button>
-    <figure class="lb-figure">
-      <div class="lb-img-wrap"><img id="lb-img" alt="" /></div>
-      <figcaption>
-        <span class="mono lb-index" id="lb-index"></span>
-        <h3 id="lb-title"></h3>
-        <div class="tags" id="lb-tags"></div>
-        <p id="lb-desc"></p>
-      </figcaption>
-    </figure>
-    <button class="lb-nav lb-next" id="lb-next" aria-label="Next work">→</button>
-  </div>
+  <div id="app-footer"></div>
 
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="main.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/home.js"></script>
 </body>
 </html>
