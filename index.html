@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>4dtruth | Seun Okunola: Painter &amp; Colourist, Lagos</title>
+  <meta name="description" content="4dtruth is the studio of Seun Okunola, a multidisciplinary artist and colourist based in Lagos, Nigeria. Textured oil paintings of crowds, markets, colour and people." />
+  <meta property="og:title" content="4dtruth | Seun Okunola" />
+  <meta property="og:description" content="I paint everything. Multidisciplinary artist and colourist based in Lagos, Nigeria." />
+  <meta property="og:image" content="public/works/moments-we-share.jpg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060606'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='15' fill='white' text-anchor='middle'%3E4d%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header" id="header">
+    <a href="#top" class="logo">4dtruth</a>
+    <nav class="nav">
+      <a href="#top">Home</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="cta">Commission a piece <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <video class="hero-media" autoplay muted loop playsinline poster="public/media/studio-poster.jpg">
+        <source src="public/media/studio.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-shade"></div>
+      <h1 class="hero-title">I paint everything.<br />Colour, texture &amp; the rhythm of people.</h1>
+      <a href="#work" class="hero-tile" aria-label="View selected work">
+        <img src="public/works/in-one-rhythm.jpg" alt="" />
+        <span>View Work</span>
+      </a>
+    </section>
+
+    <!-- Work -->
+    <section class="work" id="work">
+      <div class="section-head">
+        <h2>Selected Work <span class="count">(<span id="work-count">00</span>)</span></h2>
+        <p class="mono">Oil on canvas · Lagos, Nigeria</p>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- Statements slider -->
+    <section class="statements" aria-label="Artist statements">
+      <div class="statement-track" id="statements"></div>
+      <div class="statement-foot">
+        <div class="statement-meta" id="statement-meta"></div>
+        <div class="statement-ctrl">
+          <span class="mono" id="statement-index">01/04</span>
+          <button class="arrow" id="prev" aria-label="Previous">←</button>
+          <button class="arrow" id="next" aria-label="Next">→</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Moving strip of works -->
+    <section class="strip" aria-label="Works in motion">
+      <div class="strip-track" id="strip"></div>
+      <div class="strip-names mono">
+        <span>Ojude</span><span>Open Market</span><span>Vibrant Vision</span><span>City in Layers</span><span>Lagos, Nigeria</span>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <p class="label">About</p>
+      <div class="about-body">
+        <p class="lead">4dtruth is the studio of Seun Okunola, a multidisciplinary artist, colourist and colour therapist based in Lagos, Nigeria.</p>
+        <p>Working in thick, palette-knife oil on canvas, Seun builds crowds, markets, cityscapes and portraits out of colour and texture. Each figure is one stroke in a bigger story. The work moves between festival scenes like the Ojude series, the open markets of Lagos, and quieter studies of light and identity.</p>
+        <p>Beyond the canvas, Seun works as a strategist and activist, using colour to explore unity, resilience and the beauty of shared experience.</p>
+      </div>
+      <ul class="disciplines">
+        <li><span class="mono">01</span>Painter</li>
+        <li><span class="mono">02</span>Colourist / colour therapist</li>
+        <li><span class="mono">03</span>Multidisciplinary artist</li>
+        <li><span class="mono">04</span>Strategist</li>
+        <li><span class="mono">05</span>Activist</li>
+      </ul>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <p class="label">Get in touch</p>
+      <h2 class="contact-title">For commissions, acquisitions and collaborations, reach out. Very responsive.</h2>
+      <div class="contact-links">
+        <a href="https://wa.me/2348146375549" target="_blank" rel="noopener">WhatsApp <span>+234 814 637 5549</span> ↗</a>
+        <a href="tel:+2348146375549">Call <span>+234 814 637 5549</span> ↗</a>
+        <a href="https://www.instagram.com/4dtruth/" target="_blank" rel="noopener">Instagram <span>@4dtruth</span> ↗</a>
+        <a href="https://www.threads.net/@4dtruth" target="_blank" rel="noopener">Threads <span>@4dtruth</span> ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-row">
+      <span>Lagos, Nigeria</span>
+      <span>Arts &amp; Entertainment</span>
+      <span>© <span id="year"></span> 4dtruth</span>
+    </div>
+    <div class="wordmark">4dtruth</div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <button class="lb-close" id="lb-close" aria-label="Close">Close ✕</button>
+    <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous work">←</button>
+    <figure class="lb-figure">
+      <img id="lb-img" alt="" />
+      <figcaption>
+        <h3 id="lb-title"></h3>
+        <div class="tags" id="lb-tags"></div>
+        <p id="lb-desc"></p>
+      </figcaption>
+    </figure>
+    <button class="lb-nav lb-next" id="lb-next" aria-label="Next work">→</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
