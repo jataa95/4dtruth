@@ -28,7 +28,7 @@ const WORKS = [
   },
 ];
 
-const img = (w) => `public/works/${w.slug}.jpg`;
+const img = (w) => `assets/works/${w.slug}.jpg`;
 const tagsFor = (w) => [w.medium, w.size, w.series].filter(Boolean);
 const tagHTML = (w) => tagsFor(w).map((t) => `<span class="tag">${t}</span>`).join("");
 

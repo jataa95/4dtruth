@@ -10,15 +10,15 @@ The layout and typography take their cue from [ouiwill.com](https://www.ouiwill.
 index.html            page markup
 styles.css            all styles
 main.js               artwork data, grid, lightbox, slider, scroll effects
-public/works/         cleaned artwork images, cropped from the Instagram screenshots
-public/media/         studio video (web-compressed) and poster frame
+assets/works/         cleaned artwork images, cropped from the Instagram screenshots
+assets/media/         studio video (web-compressed) and poster frame
 assets/reference/     original screenshots and video, kept for reference
 ```
 
 ## Editing artworks
 
 Every painting is listed in the `WORKS` array at the top of `main.js`, with its title, size, medium, series and statement. To add a work:
-1. Drop a JPG into `public/works/`.
+1. Drop a JPG into `assets/works/`.
 2. Add an entry to `WORKS` with a matching `slug`.
 
 ## Run locally
