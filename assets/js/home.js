@@ -117,53 +117,37 @@
     }
   });
 
-  // ---------- Loader (first visit per session only) ----------
-  const loader = $("#loader");
-  const RING = ["moments-we-share", "ojude-series", "the-weight-of-beauty", "open-market-2", "city-in-layers", "in-one-rhythm", "the-golden-path", "hallelujah"];
-  $("#ring").innerHTML = RING.map((s, k) => `<div class="ring-card" style="--k:${k};background-image:url(assets/works/${s}.jpg)"></div>`).join("");
+  // ---------- Intro: hand-off from the wordmark preloader into the hero ----------
   const video = $("#hero-video");
-  const videoReady = new Promise((res) => {
-    if (video.readyState >= 2) return res();
-    video.addEventListener("loadeddata", res, { once: true });
-    setTimeout(res, 2500);
-  });
-  const skipLoader = reduced || sessionStorage.getItem("fdt-seen") || root.classList.contains("pt-in");
+  const played = root.classList.contains("preload");
 
   async function boot() {
     if (lenis) lenis.stop();
     await ready;
-    if (skipLoader) {
-      loader.remove();
+    const hs = hero.style;
+    const setFrame = (t, r, b, l, rad) => { hs.setProperty("--ht", t); hs.setProperty("--hr", r); hs.setProperty("--hb", b); hs.setProperty("--hl", l); hs.setProperty("--hrad", rad); };
+    if (played && !reduced) {
+      // While the preloader runs, the hero waits as a small frame in the centre...
+      setFrame("38%", "41%", "38%", "41%", "4px");
+      hs.setProperty("--hs", "1.12");
+      await FDT.preloaded;
+      await wait(450);
+      // ...then opens to full bleed as the panel wipes away
+      hero.style.transition = "clip-path 1.3s cubic-bezier(.771,.029,.189,1.007)";
+      video.style.transition = "transform 1.6s cubic-bezier(.771,.029,.189,1.007)";
+      setFrame("0%", "0%", "0%", "0%", "0px");
+      hs.setProperty("--hs", "1.02");
+      await wait(800);
+      root.classList.remove("is-loading");
+      heroContent.classList.add("in"); $$("[data-split]", heroContent).forEach((el) => el.classList.add("in"));
+      await wait(700);
+      hero.style.transition = ""; video.style.transition = "";
+    } else {
       root.classList.remove("is-loading");
       await wait(250);
       heroContent.classList.add("in"); $$("[data-split]", heroContent).forEach((el) => el.classList.add("in"));
-      if (lenis) lenis.start();
-      return;
     }
-    sessionStorage.setItem("fdt-seen", "1");
-    window.scrollTo(0, 0);
-    const hs = hero.style;
-    const setFrame = (t, r, b, l, rad) => { hs.setProperty("--ht", t); hs.setProperty("--hr", r); hs.setProperty("--hb", b); hs.setProperty("--hl", l); hs.setProperty("--hrad", rad); };
-    setFrame("50%", "50%", "50%", "50%", "4px");
-    hs.setProperty("--hs", "1.12");
-    await Promise.all([wait(2300), videoReady]);
-    loader.classList.add("out");
-    hero.style.transition = "clip-path .7s cubic-bezier(.771,.029,.189,1.007)";
-    loader.style.background = "transparent";
-    setFrame("38%", "41%", "38%", "41%", "4px");
-    await wait(650);
-    hero.style.transition = "clip-path 1.25s cubic-bezier(.771,.029,.189,1.007)";
-    video.style.transition = "transform 1.6s cubic-bezier(.771,.029,.189,1.007)";
-    setFrame("0%", "0%", "0%", "0%", "0px");
-    hs.setProperty("--hs", "1.02");
-    await wait(750);
-    root.classList.remove("is-loading");
-    heroContent.classList.add("in"); $$("[data-split]", heroContent).forEach((el) => el.classList.add("in"));
-    loader.classList.add("gone");
-    await wait(700);
-    hero.style.transition = ""; video.style.transition = "";
     if (lenis) lenis.start();
-    setTimeout(() => loader.remove(), 600);
   }
   boot();
 })();

@@ -44,7 +44,7 @@
         <span class="nav-toggle-t"><span class="bnd-hov" id="burger-t">Menu</span></span>
       </button>
     </header>
-    <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu" id="menu" aria-hidden="true" data-lenis-prevent>
       <div class="menu-grid">
         <nav class="menu-links" aria-label="Main">
           ${MENU.map((m, i) => `<a href="${m.href}" data-k="${i}" style="--i:${i}" class="${m.cur ? "cur" : ""}">
@@ -105,7 +105,7 @@
       <a href="work.html" class="f-word" id="f-word" aria-label="4dtruth: view the work"></a>
       <div class="f-bottom mono">
         <span>© <span data-year></span> 4dtruth · All artworks © Seun Okunola</span>
-        <span class="f-hint">Hover the wordmark to change the paint</span>
+        <span class="f-hint">Move across the wordmark to paint it</span>
         <a href="#" class="bnd-hov" data-top>Back to top ↑</a>
       </div>
     </footer>`;
@@ -126,6 +126,75 @@
     const id = a.getAttribute("href");
     if (id.length > 1 && $(id)) { e.preventDefault(); scrollTo(id); }
   });
+
+  // ---------- Preloader (first visit per session, every page) ----------
+  // Dark panel, giant wordmark rising letter by letter with paintings flickering
+  // inside the letters, a live counter and progress line; then the letters lift
+  // away and the panel wipes up. Resolves FDT.preloaded when the exit begins.
+  let preloaded = Promise.resolve(false);
+  if (root.classList.contains("preload")) {
+    const PAINTS = ["moments-we-share", "ojude-series", "study-in-red", "open-market-2", "the-weight-of-beauty", "the-golden-path", "city-in-layers", "red-carpet", "vibrant-vision-2", "hallelujah"];
+    const L = [..."4dtruth"];
+    document.body.insertAdjacentHTML("afterbegin", `
+      <div class="pl" id="pl" aria-hidden="true">
+        <div class="pl-word">${L.map((c, i) => `<span class="pl-l" style="--i:${i}"><span class="pl-c">${c}</span></span>`).join("")}</div>
+        <div class="pl-foot">
+          <div class="pl-meta mono"><span>Seun Okunola</span><span>Painter &amp; colourist · Lagos</span></div>
+          <div class="pl-count"><span id="pl-n">000</span><span class="pl-pc">%</span></div>
+        </div>
+        <div class="pl-bar"><i id="pl-bar"></i></div>
+      </div>`);
+    // preload the paintings used inside the letters
+    PAINTS.forEach((s) => { const im = new Image(); im.src = `assets/works/${s}.jpg`; });
+    const pl = $("#pl"), plN = $("#pl-n"), plBar = $("#pl-bar"), plLetters = $$(".pl-c", pl);
+    const layoutPL = () => {
+      const w = $(".pl-word", pl).getBoundingClientRect();
+      plLetters.forEach((c) => c.style.setProperty("--ox", `${-(c.getBoundingClientRect().left - w.left)}px`));
+      pl.style.setProperty("--fw", `${w.width}px`);
+    };
+    let pk = 0;
+    const flick = setInterval(() => { pk = (pk + 1) % PAINTS.length; pl.style.setProperty("--paint", `url(assets/works/${PAINTS[pk]}.jpg)`); }, 160);
+    pl.style.setProperty("--paint", `url(assets/works/${PAINTS[0]}.jpg)`);
+
+    // what we wait for: fonts, eager images on the page, the hero video (home)
+    const assets = [document.fonts.ready];
+    const watch = (el, ev) => new Promise((res) => { el.addEventListener(ev, res, { once: true }); el.addEventListener("error", res, { once: true }); setTimeout(res, 4500); });
+    const domReady = new Promise((r) => (document.readyState === "loading" ? addEventListener("DOMContentLoaded", r, { once: true }) : r()));
+    preloaded = domReady.then(async () => {
+      $$("img:not([loading=lazy])").forEach((im) => { if (!im.complete) assets.push(watch(im, "load")); });
+      const v = $("video"); if (v && v.readyState < 2) assets.push(watch(v, "loadeddata"));
+      let done = 0; const total = assets.length;
+      assets.forEach((a) => a.then(() => done++));
+      if (lenis) lenis.stop();
+      await document.fonts.ready; layoutPL(); pl.classList.add("in");
+      // counter: eases towards real progress, never faster than the minimum duration
+      const t0 = performance.now(), MIN = 2200;
+      let shown = 0;
+      await new Promise((res) => {
+        const tick = (now) => {
+          const real = total ? done / total : 1;
+          const time = clamp((now - t0) / MIN);
+          const target = Math.min(real, time) * 100;
+          shown = lerp(shown, target, 0.08);
+          if (target >= 100 && shown > 99.4) shown = 100;
+          plN.textContent = String(Math.floor(shown)).padStart(3, "0");
+          plBar.style.transform = `scaleX(${(shown / 100).toFixed(4)})`;
+          if (shown >= 100) res(); else requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+      clearInterval(flick);
+      pl.style.setProperty("--paint", `url(assets/works/moments-we-share.jpg)`);
+      await wait(250);
+      pl.classList.add("out");                 // letters lift away
+      await wait(380);
+      pl.classList.add("wipe");                // panel wipes up
+      sessionStorage.setItem("fdt-seen", "1");
+      root.classList.remove("preload");
+      setTimeout(() => { pl.remove(); if (lenis && !root.classList.contains("is-loading")) lenis.start(); }, 1100);
+      return true;
+    });
+  }
 
   // ---------- Page transitions ----------
   const pt = $("#pt");
@@ -297,28 +366,44 @@
   }
   tickClock(); setInterval(tickClock, 1000);
 
-  // ---------- Footer wordmark filled with moving paint ----------
+  // ---------- Footer wordmark ----------
+  // Paper-white letters rise in (scrubbed by scroll, each letter at its own pace).
+  // A soft spotlight follows the cursor and shows painting through the letters;
+  // when idle (and on touch screens) the spotlight drifts by itself.
   const fw = $("#f-word");
+  let fwTick = null;
   if (fw) {
     const paints = ["ojude-series", "moments-we-share", "study-in-red", "open-market-2", "the-weight-of-beauty", "the-golden-path", "city-in-layers", "vibrant-vision-2"];
+    const L = [..."4dtruth"];
+    const letters = (cls) => L.map((c, i) => `<span class="${cls}" style="--i:${i}">${c}</span>`).join("");
+    fw.innerHTML = `<span class="fw-base" aria-hidden="true">${letters("fw-l")}</span><span class="fw-paint" aria-hidden="true">${letters("fw-l fw-p")}</span>`;
+    const pLetters = $$(".fw-p", fw);
     let pi = 0;
-    fw.innerHTML = [..."4dtruth"].map((c, i) => `<span style="--i:${i}" aria-hidden="true">${c}</span>`).join("");
-    const letters = $$("span", fw);
-    const layout = () => {
-      const w = fw.getBoundingClientRect();
-      letters.forEach((s) => s.style.setProperty("--ox", `${-(s.getBoundingClientRect().left - w.left)}px`));
-      fw.style.setProperty("--fw", `${w.width}px`);
-    };
     const setPaint = () => fw.style.setProperty("--paint", `url(assets/works/${paints[pi]}.jpg)`);
     setPaint();
-    fw.addEventListener("mouseenter", () => { pi = (pi + 1) % paints.length; setPaint(); });
-    fw.addEventListener("mousemove", (e) => {
-      const r = fw.getBoundingClientRect();
-      fw.style.setProperty("--mx", ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
-      fw.style.setProperty("--my", ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
-    });
-    setInterval(() => { if (!fw.matches(":hover")) { pi = (pi + 1) % paints.length; setPaint(); } }, 4000);
-    new IntersectionObserver(([en], o) => { if (en.isIntersecting) { fw.classList.add("in"); o.disconnect(); } }, { threshold: 0.25 }).observe(fw);
+    const layout = () => {
+      const w = fw.getBoundingClientRect();
+      pLetters.forEach((s) => s.style.setProperty("--ox", `${-s.offsetLeft}px`));
+      fw.style.setProperty("--fw", `${w.width}px`);
+    };
+    let hover = false, tx = 0, ty = 0, x = 0, y = 0, rad = 0;
+    fw.addEventListener("mouseenter", () => { hover = true; pi = (pi + 1) % paints.length; setPaint(); });
+    fw.addEventListener("mouseleave", () => { hover = false; });
+    fw.addEventListener("mousemove", (e) => { const r = fw.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; });
+    setInterval(() => { if (!hover) { pi = (pi + 1) % paints.length; setPaint(); } }, 5000);
+    fwTick = (now) => {
+      const r = fw.getBoundingClientRect(), vh = innerHeight;
+      if (r.bottom < 0 || r.top > vh) return;
+      // scroll progress: 0 as the wordmark enters, 1 once it is fully in view
+      const p = clamp((vh - r.top) / (r.height * 1.1));
+      fw.style.setProperty("--p", p.toFixed(4));
+      if (!hover) { tx = r.width * (0.5 + 0.42 * Math.sin(now * 0.00035)); ty = r.height * (0.5 + 0.28 * Math.sin(now * 0.0006 + 1)); }
+      const trad = hover ? Math.min(r.width * 0.2, 340) : Math.min(r.width * 0.14, 220);
+      x = lerp(x, tx, 0.12); y = lerp(y, ty, 0.12); rad = lerp(rad, trad * p, 0.08);
+      fw.style.setProperty("--sx", `${x.toFixed(1)}px`);
+      fw.style.setProperty("--sy", `${y.toFixed(1)}px`);
+      fw.style.setProperty("--sr", `${rad.toFixed(1)}px`);
+    };
     document.fonts.ready.then(layout);
     addEventListener("resize", layout);
   }
@@ -330,6 +415,7 @@
     const dt = Math.min(now - last, 50); last = now;
     if (lenis) lenis.raf(now);
     updateFill(); updateParallax(); updateNav();
+    if (fwTick) fwTick(now);
     for (const h of hooks) h(now, dt);
     requestAnimationFrame(frame);
   }
@@ -358,7 +444,7 @@
   const ready = domReady.then(() => document.fonts.ready).then(() => { prepare(document); revealPage(); });
   window.FDT = {
     $, $$, clamp, lerp, easeInOut, pad2, pad3, wait, reduced, lenis, scrollTo,
-    imgSrc, pieceUrl, tagsFor, tagHTML, waLink, card, prepare, split, ready,
+    imgSrc, pieceUrl, tagsFor, tagHTML, waLink, card, prepare, split, ready, preloaded,
     onFrame: (fn) => hooks.push(fn),
     bySlug: (s) => WORKS.find((w) => w.slug === s),
   };
